@@ -1,4 +1,4 @@
 import { OutstaticApi } from 'outstatic'
 
-export const GET = OutstaticApi()
-export const POST = OutstaticApi()
+// 必须使用对象解构赋值，一次性导出两个方法
+export const { GET, POST } = OutstaticApi()
