@@ -25,6 +25,7 @@
   --radius: 0.5rem;
 }
 
+/* 暗色模式变量 + 显式备用样式 */
 .dark {
   --color-background: hsl(220 15% 10%);
   --color-foreground: hsl(40 20% 95%);
@@ -52,6 +53,7 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.7;
     font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;  /* 平滑过渡 */
   }
   a {
     color: hsl(217 91% 60%);
@@ -62,4 +64,10 @@
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+}
+
+/* 显式保障暗色模式下的 body 背景，避免变量被覆盖 */
+.dark body {
+  background-color: hsl(220 15% 10%);
+  color: hsl(40 20% 95%);
 }
