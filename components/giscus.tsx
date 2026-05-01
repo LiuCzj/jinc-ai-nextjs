@@ -13,9 +13,9 @@ export default function Giscus() {
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.setAttribute("data-repo", "LiuCzj/jinc-ai-nextjs");
-    script.setAttribute("data-repo-id", "你的repoId");
+    script.setAttribute("data-repo-id", "R_kgDOSRyNcg");
     script.setAttribute("data-category", "Announcements");
-    script.setAttribute("data-category-id", "你的categoryId");
+    script.setAttribute("data-category-id", "DIC_kwDOSRyNcs4C8I43");
     script.setAttribute("data-mapping", "pathname");
     script.setAttribute("data-strict", "0");
     script.setAttribute("data-reactions-enabled", "1");
