@@ -1,22 +1,48 @@
+'use client';
+
+import { useState } from 'react';
+import { Github, Mail, MessageCircle } from 'lucide-react';
+
 export default function Footer() {
+  const [showWechat, setShowWechat] = useState(false);
+
   return (
     <footer className="max-w-3xl mx-auto px-6 mt-16 py-8 border-t border-border text-center text-text-light text-sm">
-      <div className="flex justify-center gap-6 mb-4">
+      <div className="flex justify-center gap-6 mb-4 items-center">
+        {/* GitHub */}
         <a href="https://github.com/LiuCzj" target="_blank" className="text-text-light hover:text-accent transition" title="GitHub">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          <Github size={20} />
+        </a>
+        {/* CSDN */}
+        <a href="https://blog.csdn.net/datafenxi?spm=1000.2115.3001.10640" target="_blank" className="text-text-light hover:text-accent transition" title="CSDN">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">C</text>
           </svg>
         </a>
-        <a href="https://blog.csdn.net/datafenxi?spm=1000.2115.3001.10640" target="_blank" className="text-text-light hover:text-accent" title="CSDN">
-          📘
+        {/* 知乎 */}
+        <a href="https://www.zhihu.com/people/datafenxi" target="_blank" className="text-text-light hover:text-accent transition" title="知乎">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <text x="12" y="18" textAnchor="middle" fontSize="18" fontWeight="bold">知</text>
+          </svg>
         </a>
-        <a href="https://www.zhihu.com/people/datafenxi" target="_blank" className="text-text-light hover:text-accent" title="知乎">
-          🤔
+        {/* 邮箱 */}
+        <a href="mailto:placeholder@example.com" className="text-text-light hover:text-accent transition" title="邮箱">
+          <Mail size={20} />
         </a>
-        <a href="mailto:placeholder@example.com" className="text-text-light hover:text-accent" title="邮箱">
-          ✉️
-        </a>
+        {/* 微信 */}
+        <button onClick={() => setShowWechat(!showWechat)} className="text-text-light hover:text-accent transition" title="微信公众号">
+          <MessageCircle size={20} />
+        </button>
       </div>
+
+      {showWechat && (
+        <div className="mb-4">
+          <img src="/images/wechat-qrcode.jpg" alt="微信公众号：锦创AI" width="160" className="mx-auto rounded-xl shadow-lg" />
+          <p className="text-xs mt-2 text-text-light">扫码关注「锦创AI」</p>
+        </div>
+      )}
+
       <p>© 2026 锦创AI · 由 Next.js & Vercel 驱动</p>
     </footer>
   );

@@ -19,10 +19,10 @@ export default function Header() {
   return (
     <header className="max-w-3xl mx-auto px-6">
       <nav className="flex items-center justify-between py-5 border-b border-border mb-8">
-        <Link href="/" className="text-xl font-bold text-text no-underline flex items-center gap-2">
-          <span>🧠</span> 锦创AI
+        <Link href="/" className="text-xl font-bold text-text no-underline">
+          锦创AI
         </Link>
-        <ul className="flex gap-6 text-sm">
+        <ul className="flex gap-8 text-base font-semibold">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
