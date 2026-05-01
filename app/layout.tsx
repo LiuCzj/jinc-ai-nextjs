@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: "锦创AI",
-    template: "%s | 锦创AI",
+    default: '锦创AI',
+    template: '%s | 锦创AI',
   },
-  description: "专注于机器学习、时间序列与计算机视觉的AI技术博客。",
-  icons: { icon: "/favicon.svg" },
+  description: '专注于机器学习、时间序列与计算机视觉的AI技术博客。',
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({

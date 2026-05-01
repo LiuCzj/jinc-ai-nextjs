@@ -1,6 +1,5 @@
-import { getAllPosts } from "@/lib/posts";
-import PostCard from "@/components/post-card";
-import AudienceFilter from "@/components/audience-filter";
+import { getAllPosts } from '@/lib/posts';
+import AudienceFilter from '@/components/audience-filter';
 
 export default function Home() {
   const posts = getAllPosts();
@@ -16,13 +15,13 @@ export default function Home() {
           className="rounded-full mx-auto"
         />
         <h1 className="text-3xl font-bold mt-4 mb-1 tracking-tight">锦创AI</h1>
-        <p className="text-text-light text-lg max-w-lg mx-auto">
+        <p className="text-muted-foreground text-lg max-w-lg mx-auto">
           专注于机器学习、时间序列与计算机视觉的AI技术博客。提供科普入门与技术深潜内容。
         </p>
         <div className="flex justify-center gap-3 mt-5 flex-wrap">
-          <span className="bg-surface border border-border px-3 py-1 rounded-full text-xs">🤖 机器学习</span>
-          <span className="bg-surface border border-border px-3 py-1 rounded-full text-xs">📈 时间序列</span>
-          <span className="bg-surface border border-border px-3 py-1 rounded-full text-xs">👁️ 计算机视觉</span>
+          <span className="bg-secondary text-secondary-foreground border border-border px-3 py-1 rounded-full text-xs">🤖 机器学习</span>
+          <span className="bg-secondary text-secondary-foreground border border-border px-3 py-1 rounded-full text-xs">📈 时间序列</span>
+          <span className="bg-secondary text-secondary-foreground border border-border px-3 py-1 rounded-full text-xs">👁️ 计算机视觉</span>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -15,8 +15,8 @@ export default function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="bg-surface border border-border text-text px-3 py-1.5 rounded-lg text-sm cursor-pointer transition hover:bg-border"
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      className="bg-card border border-border text-foreground px-3 py-1.5 rounded-lg text-sm cursor-pointer transition hover:bg-secondary"
       aria-label="切换暗色模式"
     >
       🌓 模式
