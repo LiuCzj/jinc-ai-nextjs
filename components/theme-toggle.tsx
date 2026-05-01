@@ -9,12 +9,11 @@ export default function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  // 还未挂载时返回占位按钮，避免布局跳动和水合错误
   if (!mounted) {
     return (
       <button
         className="w-20 h-9 rounded-lg border border-border bg-card"
-        aria-label="loading"
+        aria-label="加载中"
       />
     );
   }
