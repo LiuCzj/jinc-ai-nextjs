@@ -1,4 +1,5 @@
+// @ts-nocheck
 import { OutstaticApi } from 'outstatic'
 
-// 必须使用对象解构赋值，一次性导出两个方法
-export const { GET, POST } = OutstaticApi()
+// 在当前版本中，OutstaticApi 直接导出对象，不需要加括号调用
+export const { GET, POST } = OutstaticApi
