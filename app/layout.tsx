@@ -1,40 +1,22 @@
-import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
-import './globals.css';
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
+import Navbar from '@/components/Navbar'
 
-export const metadata: Metadata = {
-  title: {
-    default: '锦创AI',
-    template: '%s | 锦创AI',
-  },
-  description: '专注于机器学习、时间序列与计算机视觉的AI技术博客。',
-  icons: { icon: '/favicon.svg' },
-};
+const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          <main className="max-w-3xl mx-auto px-6">{children}</main>
-          <Footer />
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <Navbar />
+          {/* 增加一个简单的 CSS 动画容器 */}
+          <div className="animate-fadeIn">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
