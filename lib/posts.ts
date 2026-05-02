@@ -15,14 +15,13 @@ export interface Post {
 
 const contentDir = path.join(process.cwd(), "content");
 
-// 估算阅读时间（中文约 400 字/分钟）
 function estimateReadingTime(text: string): number {
   const charCount = text.replace(/\s/g, "").length;
   return Math.max(1, Math.ceil(charCount / 400));
 }
 
 export function getAllPosts(): Post[] {
-  const dirs = ["popular", "pro"];
+  const dirs = ["popular", "pro", "projects"]; // 新增 projects
   const posts: Post[] = [];
 
   dirs.forEach((dir) => {
@@ -48,7 +47,6 @@ export function getAllPosts(): Post[] {
     });
   });
 
-  // 按日期倒序排列
   posts.sort((a, b) => (b.date > a.date ? 1 : -1));
   return posts;
 }

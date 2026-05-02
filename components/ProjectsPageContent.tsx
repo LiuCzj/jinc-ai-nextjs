@@ -1,28 +1,26 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Code2, Cpu, Eye, Sparkles } from 'lucide-react'
+import type { Post } from '@/lib/posts'
 
-const projects = [
-  {
-    title: '时间序列预测平台',
-    description: '使用自研Transformer模型，应用于供应链需求预测，支持多步预测与不确定性分析。',
-    icon: Cpu,
-    tags: ['Transformer', '时序预测', '供应链']
-  },
-  {
-    title: '工业缺陷检测系统',
-    description: '基于YOLOv8与异常检测算法，部署至边缘设备，实时检测产品表面缺陷。',
-    icon: Eye,
-    tags: ['YOLOv8', '边缘计算', '缺陷检测']
-  },
-  {
-    title: '交互式数据分析看板',
-    description: '集成Streamlit与Plotly，用于快速探索和可视化时间序列异常模式。',
-    icon: Sparkles,
-    tags: ['Streamlit', '可视化', '异常检测']
-  }
-]
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  'Cpu': Cpu,
+  'Eye': Eye,
+  'Sparkles': Sparkles,
+  'Code2': Code2,
+};
+
+// 若文章 frontmatter 中包含 icon 字段，可使用该映射，否则默认使用 Code2
+function getIcon(post: Post) {
+  // 你可以扩展：在 markdown 中添加 icon 字段，例如 icon: "Cpu"
+  // 这里简单根据标题或标签返回
+  if (post.tags.includes('Transformer')) return Cpu;
+  if (post.tags.includes('YOLOv8')) return Eye;
+  if (post.tags.includes('Streamlit')) return Sparkles;
+  return Code2;
+}
 
 const container = {
   hidden: { opacity: 0 },
@@ -30,14 +28,14 @@ const container = {
     opacity: 1,
     transition: { staggerChildren: 0.15 }
   }
-}
+};
 
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 }
-}
+};
 
-export default function ProjectsPageContent() {
+export default function ProjectsPageContent({ projects }: { projects: Post[] }) {
   return (
     <div className="max-w-5xl mx-auto px-4 py-20">
       <motion.div
@@ -54,39 +52,48 @@ export default function ProjectsPageContent() {
         </p>
       </motion.div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        {projects.map((project) => (
-          <motion.div
-            key={project.title}
-            variants={item}
-            whileHover={{ y: -5, scale: 1.02 }}
-            className="group bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all"
-          >
-            <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition">
-              <project.icon className="w-6 h-6 text-accent" />
-            </div>
-            <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="text-[10px] font-bold px-2 py-0.5 rounded bg-secondary text-secondary-foreground border border-border"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+      {projects.length === 0 ? (
+        <p className="text-center text-muted-foreground">项目即将上线...</p>
+      ) : (
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {projects.map((post) => {
+            const IconComponent = getIcon(post);
+            return (
+              <motion.div key={post.slug} variants={item}>
+                <Link href={`/posts/${post.slug}`} className="block no-underline">
+                  <motion.div
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    className="group bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all cursor-pointer"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition">
+                      <IconComponent className="w-6 h-6 text-accent" />
+                    </div>
+                    <h3 className="text-lg font-bold mb-2">{post.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {post.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-bold px-2 py-0.5 rounded bg-secondary text-secondary-foreground border border-border"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      )}
 
       <div className="mt-16 text-center">
         <p className="text-muted-foreground text-sm">
@@ -101,5 +108,5 @@ export default function ProjectsPageContent() {
         </p>
       </div>
     </div>
-  )
+  );
 }
