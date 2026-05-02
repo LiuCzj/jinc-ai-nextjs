@@ -15,9 +15,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="font-bold text-xl tracking-tighter">锦创AI</Link>
         <div className="flex items-center gap-6">
+          {/* 搜索框焦点缩放动效 */}
           <motion.div whileFocus={{ scale: 1.05 }} className="relative hidden sm:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input type="text" placeholder="搜索文章..." className="bg-secondary/50 rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none w-64 transition-all" />
+            <input 
+              type="text" 
+              placeholder="搜索文章..." 
+              className="bg-secondary/50 rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none w-64 transition-all" 
+            />
           </motion.div>
           {mounted && (
             <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="p-2 rounded-full hover:bg-secondary">
