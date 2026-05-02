@@ -1,10 +1,9 @@
-'use client'
-import { motion } from 'framer-motion'
 import { getAllPosts } from '@/lib/posts'
-import PostCard from '@/components/PostCard' // 修复：这里首字母必须大写！
+import PostCard from '@/components/PostCard'
+import { AnimatedGrid, AnimatedItem } from '@/components/MotionLayout'
 
 export default function PopularPage() {
-  const posts = getAllPosts() // 如果你有获取热门文章的逻辑，请在这里替换
+  const posts = getAllPosts()
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-20">
@@ -13,20 +12,13 @@ export default function PopularPage() {
         <p className="text-muted-foreground">阅读量最高的技术深度长文。</p>
       </div>
 
-      <motion.div 
-        initial="hidden" animate="show"
-        variants={{
-          hidden: { opacity: 0 },
-          show: { opacity: 1, transition: { staggerChildren: 0.1 } }
-        }}
-        className="grid gap-6"
-      >
-        {posts.map((post) => (
-          <motion.div key={post.slug} variants={{ hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+      <AnimatedGrid>
+        {posts?.map((post: any) => (
+          <AnimatedItem key={post.slug}>
             <PostCard post={post} />
-          </motion.div>
+          </AnimatedItem>
         ))}
-      </motion.div>
+      </AnimatedGrid>
     </div>
   )
 }
