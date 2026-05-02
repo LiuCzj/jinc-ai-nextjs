@@ -1,37 +1,31 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { getAllPosts } from '@/lib/posts'
 import PostCard from '@/components/PostCard'
 import { AnimatedHomeHeader, AnimatedGrid, AnimatedItem } from '@/components/MotionLayout'
 import AudienceFilter from '@/components/audience-filter'
-import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
-  const [posts, setPosts] = useState<ReturnType<typeof getAllPosts>>([])
-  const searchParams = useSearchParams()
-  const searchQuery = searchParams.get('search')
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-  useEffect(() => {
-    setPosts(getAllPosts())
-  }, [])
+export default async function Home({ searchParams }: { searchParams: SearchParams }) {
+  const allPosts = getAllPosts()
+  const params = await searchParams
+  const searchQuery = params?.search as string | undefined
 
-  // 根据 search 参数过滤（同时标题或标签包含关键词）
-  const filtered = searchQuery
-    ? posts.filter(
+  // 服务端根据搜索参数过滤
+  const posts = searchQuery
+    ? allPosts.filter(
         p =>
           p.title.includes(searchQuery) ||
           p.tags.some(t => t.includes(searchQuery))
       )
-    : posts
+    : allPosts
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-20">
       <AnimatedHomeHeader />
-      <AudienceFilter posts={filtered} />
+      <AudienceFilter posts={posts} />
 
       <AnimatedGrid>
-        {filtered.map((post: any) => (
+        {posts.map((post: any) => (
           <AnimatedItem key={post.slug}>
             <PostCard post={post} />
           </AnimatedItem>
