@@ -6,7 +6,6 @@ import 'outstatic/outstatic.css'
 import { useEffect, useState, use } from 'react'
 
 export default function Page({ params }: { params: Promise<{ ost: string[] }> }) {
-  // 使用 React 19 的 use 钩子安全解构参数
   const resolvedParams = use(params)
   const [mounted, setMounted] = useState(false)
 

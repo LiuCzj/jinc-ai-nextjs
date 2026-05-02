@@ -1,18 +1,14 @@
-import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/Navbar'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
-          {/* 增加一个简单的 CSS 动画容器 */}
-          <div className="animate-fadeIn">
+          <div className="animate-in fade-in duration-700">
             {children}
           </div>
         </ThemeProvider>
