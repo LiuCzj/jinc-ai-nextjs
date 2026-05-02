@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 
-// 首页专属的头像和呼吸动画头部
 export function AnimatedHomeHeader() {
   return (
     <div className="text-center mb-16">
@@ -11,7 +10,7 @@ export function AnimatedHomeHeader() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary/10 shadow-2xl"
       >
-        <img src="/avatar.png" alt="Avatar" className="w-full h-full object-cover" />
+        <img src="/images/avatar.png" alt="Avatar" className="w-full h-full object-cover" />
       </motion.div>
 
       <motion.h1 
@@ -28,7 +27,6 @@ export function AnimatedHomeHeader() {
   )
 }
 
-// 列表交错滑入的外壳
 export function AnimatedGrid({ children }: { children: React.ReactNode }) {
   return (
     <motion.div 
@@ -44,7 +42,6 @@ export function AnimatedGrid({ children }: { children: React.ReactNode }) {
   )
 }
 
-// 单个卡片滑入的包裹器
 export function AnimatedItem({ children }: { children: React.ReactNode }) {
   return (
     <motion.div variants={{ hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1 } }}>

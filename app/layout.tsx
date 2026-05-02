@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
-          <main className="animate-in fade-in duration-1000">{children}</main>
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

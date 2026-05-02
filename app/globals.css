@@ -1,11 +1,9 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* 明亮模式 */
   --background: 40 20% 98%;
   --foreground: 20 5% 10%;
   --card: 40 20% 100%;
@@ -24,7 +22,6 @@
 }
 
 .dark {
-  /* 参考开源仓库的高级暗黑模式（深蓝灰） */
   --background: 222 47% 11%;
   --foreground: 210 40% 98%;
   --card: 222 47% 11%;

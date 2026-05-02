@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import PostCard from './post-card';
+import PostCard from './PostCard';  // 注意大小写
 
 interface Post {
   slug: string;
