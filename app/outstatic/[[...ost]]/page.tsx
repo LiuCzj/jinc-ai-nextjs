@@ -1,22 +1,17 @@
 // @ts-nocheck
 'use client'
-
 import { Outstatic } from 'outstatic'
 import 'outstatic/outstatic.css'
-import { useEffect, useState, use } from 'react'
+import { use, useState, useEffect } from 'react'
 
-export default function Page({ params }: { params: Promise<{ ost: string[] }> }) {
+export default function Page({ params }) {
   const resolvedParams = use(params)
   const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  useEffect(() => setMounted(true), [])
 
   if (!mounted) return null
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-black">
       <Outstatic params={resolvedParams} />
     </div>
   )
