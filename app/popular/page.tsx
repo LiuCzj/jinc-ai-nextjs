@@ -1,20 +1,32 @@
-import { getAllPosts } from '@/lib/posts';
-import PostCard from '@/components/post-card';
-
-export const metadata = {
-  title: '科普入门',
-};
+'use client'
+import { motion } from 'framer-motion'
+import { getAllPosts } from '@/lib/posts'
+import PostCard from '@/components/PostCard' // 修复：这里首字母必须大写！
 
 export default function PopularPage() {
-  const posts = getAllPosts().filter((p) => p.audience === 'public');
+  const posts = getAllPosts() // 如果你有获取热门文章的逻辑，请在这里替换
 
   return (
-    <div className="py-6">
-      <h1 className="text-2xl font-bold mb-6">科普入门</h1>
-      <p className="text-muted-foreground mb-6">面向大众的AI科普文章，让每个人都跟上智能时代的脚步。</p>
-      {posts.map((post) => (
-        <PostCard key={post.slug} post={post} />
-      ))}
+    <div className="max-w-4xl mx-auto px-4 py-20">
+      <div className="mb-12">
+        <h1 className="text-3xl font-bold mb-4">热门文章</h1>
+        <p className="text-muted-foreground">阅读量最高的技术深度长文。</p>
+      </div>
+
+      <motion.div 
+        initial="hidden" animate="show"
+        variants={{
+          hidden: { opacity: 0 },
+          show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+        }}
+        className="grid gap-6"
+      >
+        {posts.map((post) => (
+          <motion.div key={post.slug} variants={{ hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+            <PostCard post={post} />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
-  );
+  )
 }
