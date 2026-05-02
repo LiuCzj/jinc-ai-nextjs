@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Fuse from 'fuse.js';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface SearchItem {
   slug: string;
@@ -15,6 +16,7 @@ export default function Search() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchItem[]>([]);
   const fuseRef = useRef<Fuse<SearchItem> | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetch('/api/search')
@@ -40,13 +42,24 @@ export default function Search() {
     setResults(fuseRef.current.search(value.trim()).slice(0, 8).map((r) => r.item));
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && query.trim()) {
+      e.preventDefault();
+      // 跳转到首页，并携带 search 参数
+      router.push(`/?search=${encodeURIComponent(query.trim())}`);
+      setQuery('');
+      setResults([]);
+    }
+  };
+
   return (
     <div className="mb-4">
       <input
         type="text"
-        placeholder="🔍 搜索文章、标签..."
+        placeholder="🔍 搜索文章、标签... 按回车跳转"
         value={query}
         onChange={(e) => handleSearch(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="w-full p-3 border border-input rounded-lg bg-card text-foreground text-sm transition focus:outline-none focus:border-ring focus:shadow-[0_0_0_3px_hsl(var(--ring)/0.1)]"
         autoComplete="off"
       />
