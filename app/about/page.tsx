@@ -1,18 +1,24 @@
-import { User, Sparkles } from 'lucide-react'
+'use client'; // 需要客户端能力来运行动画
 
-export const metadata = { title: '关于我' };
+import { User, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-20">
       <div className="text-center mb-16">
-        <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary/20 shadow-2xl">
+        {/* 动态头像 */}
+        <motion.div
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary/20 shadow-2xl"
+        >
           <img src="/images/avatar.png" alt="Avatar" className="w-full h-full object-cover" />
-        </div>
+        </motion.div>
         <h1 className="text-3xl font-bold mb-4">关于我</h1>
         <p className="text-muted-foreground max-w-md mx-auto">长期穿梭在数据与算法之间的AI从业者</p>
       </div>
-      
+
       <div className="grid md:grid-cols-2 gap-6">
         <div className="bg-card rounded-2xl p-8 border border-border shadow-sm">
           <div className="flex items-center gap-3 mb-6">
@@ -38,7 +44,7 @@ export default function AboutPage() {
             </li>
           </ul>
         </div>
-        
+
         <div className="bg-card rounded-2xl p-8 border border-border shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <Sparkles className="text-accent" size={24} />

@@ -26,6 +26,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const htmlContent = marked(post.content);
 
+  // 受众标签映射
+  const audienceLabel =
+    post.audience === "professional" ? "技术深潜" :
+    post.audience === "projects" ? "项目展示" : "科普入门";
+
   return (
     <article className="bg-card rounded-xl p-8 my-8 border border-border shadow-sm">
       <header className="mb-6">
@@ -36,7 +41,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <span>{post.readingTime} 分钟阅读</span>
           <span>·</span>
           <span className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-xs font-semibold uppercase">
-            {post.audience === "professional" ? "技术深潜" : "科普入门"}
+            {audienceLabel}
           </span>
         </div>
       </header>
